@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class Contact implements Serializable {
 
-    public   String uid;
+    public String uid;
     public String number;
     public String name;
     public String business;
@@ -37,6 +37,7 @@ public class Contact implements Serializable {
     @Exclude
     public Map<String, Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();
+
         result.put("number", number);
         result.put("name", name);
         result.put("business", business);
