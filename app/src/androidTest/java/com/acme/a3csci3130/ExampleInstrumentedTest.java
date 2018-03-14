@@ -81,6 +81,13 @@ public class ExampleInstrumentedTest{
         onView(withId(R.id.province)).perform(replaceText("BC"));
         closeSoftKeyboard();
         onView(withId(R.id.updateButton)).perform(click());
+        Thread.sleep(1500);
+        onData(anything()).inAdapterView(withId(R.id.listView)).atPosition(0).perform(click());
+        onView(withId(R.id.name)).check(matches(withText("test")));
+        onView(withId(R.id.number)).check(matches(withText("233333333")));
+        onView(withId(R.id.business)).check(matches(withText("Distributor")));
+        onView(withId(R.id.address)).check(matches(withText("yadayala")));
+        onView(withId(R.id.province)).check(matches(withText("BC")));
     }
     @Test
     //delete
