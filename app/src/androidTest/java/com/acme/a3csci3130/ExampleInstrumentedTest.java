@@ -23,7 +23,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
  * Instrumentation test, which will execute on an Android device.
- *
+ * Before the espresso test pleace make sure that the database is empty.
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
@@ -40,7 +40,7 @@ public class ExampleInstrumentedTest{
     }
     @Test
     //create
-    public void check1_create(){
+    public void check1_create() throws InterruptedException{
         onView(withId(R.id.createButton)).perform(click());
         onView(withId(R.id.name)).perform(typeText("name"));
         closeSoftKeyboard();
@@ -53,6 +53,14 @@ public class ExampleInstrumentedTest{
         onView(withId(R.id.province)).perform(typeText("NS"));
         closeSoftKeyboard();
         onView(withId(R.id.createButton)).perform(click());
+        Thread.sleep(1500);
+        onData(anything()).inAdapterView(withId(R.id.listView)).atPosition(0).perform(click());
+        onView(withId(R.id.name)).check(matches(withText("name")));
+        onView(withId(R.id.number)).check(matches(withText("123456789")));
+        onView(withId(R.id.business)).check(matches(withText("Fisher")));
+        onView(withId(R.id.address)).check(matches(withText("kaklaka")));
+        onView(withId(R.id.province)).check(matches(withText("NS")));
+        onView(withId(R.id.updateButton)).perform(click());
     }
     @Test
     //read
